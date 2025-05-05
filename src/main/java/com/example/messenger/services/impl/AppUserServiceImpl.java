@@ -5,6 +5,7 @@ import com.example.messenger.models.requests.AppUserCreateRequest;
 import com.example.messenger.repositories.AppUserRepository;
 import com.example.messenger.services.AppUserService;
 import lombok.Data;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -13,12 +14,13 @@ import java.util.Optional;
 @Data
 public class AppUserServiceImpl implements AppUserService {
     private final AppUserRepository appUserRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public Optional<AppUser> register(AppUserCreateRequest appUserCreateRequest) {
         AppUser appUser = new AppUser();
         appUser.setUsername(appUserCreateRequest.getUsername());
-        appUser.setPassword(appUserCreateRequest.getPassword());
+        appUser.setPassword(passwordEncoder.encode(appUserCreateRequest.getPassword()));
         appUser.setEmail(appUserCreateRequest.getEmail());
         appUser.setPhone(appUserCreateRequest.getPhone());
         appUser.setFirstName(appUserCreateRequest.getFirstName());
