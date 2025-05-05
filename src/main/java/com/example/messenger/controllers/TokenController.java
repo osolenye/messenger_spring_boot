@@ -13,6 +13,7 @@ import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.Instant;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
  * @author Josh Cummings
  */
 @RestController
+@RequestMapping("/api/v1/token")
 public class TokenController {
 
     private final JwtEncoder encoder;
@@ -35,7 +37,7 @@ public class TokenController {
         this.authenticationManager = authenticationManager;
     }
 
-    @PostMapping("/token")
+    @PostMapping("/")
     public ResponseEntity<?> token(@RequestBody LoginRequest loginRequest) {
         try {
             Authentication authentication = authenticationManager.authenticate(

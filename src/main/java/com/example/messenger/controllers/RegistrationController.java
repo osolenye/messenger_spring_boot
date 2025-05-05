@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/registration")
+@RequestMapping("/api/v1/registration")
 @Data
 public class RegistrationController {
     private final AppUserService appUserService;
