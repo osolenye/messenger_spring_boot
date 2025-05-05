@@ -46,7 +46,8 @@ public class RestConfig {
         // @formatter:off
         http
                 .authorizeHttpRequests((authorize) -> authorize
-                        .anyRequest().authenticated()
+                        .requestMatchers("/registration/", "/registration/**", "/swagger-ui/**").permitAll()
+                        .anyRequest().permitAll()
                 )
                 .csrf((csrf) -> csrf.ignoringRequestMatchers("/token"))
                 .httpBasic(Customizer.withDefaults())
