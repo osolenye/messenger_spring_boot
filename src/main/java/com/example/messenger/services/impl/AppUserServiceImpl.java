@@ -1,7 +1,7 @@
 package com.example.messenger.services.impl;
 
 import com.example.messenger.models.entities.AppUser;
-import com.example.messenger.models.requests.AppUserCreateRequest;
+import com.example.messenger.models.dto.AppUserCreateRequest;
 import com.example.messenger.repositories.AppUserRepository;
 import com.example.messenger.services.AppUserService;
 import lombok.Data;

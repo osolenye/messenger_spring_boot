@@ -1,6 +1,6 @@
 package com.example.messenger.controllers;
 
-import com.example.messenger.models.requests.AppUserCreateRequest;
+import com.example.messenger.models.dto.AppUserCreateRequest;
 import com.example.messenger.services.AppUserService;
 import lombok.Data;
 import org.springframework.http.ResponseEntity;

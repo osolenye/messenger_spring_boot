@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -19,6 +19,9 @@ public class Chat {
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
 
+    private String chatName;
+    private String chatDescription;
+
     @ManyToMany
-    ArrayList<AppUser> users = new ArrayList<>();
+    private List<AppUser> users;
 }

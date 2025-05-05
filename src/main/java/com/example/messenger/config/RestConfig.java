@@ -47,10 +47,10 @@ public class RestConfig {
         // @formatter:off
         http
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/registration/", "/registration/**", "/swagger-ui/**").permitAll()
+                        .requestMatchers("/api/v1/registration/", "/api/v1/registration/**", "/api/v1/token/", "/swagger-ui/**").permitAll()
                         .anyRequest().permitAll()
                 )
-                .csrf((csrf) -> csrf.ignoringRequestMatchers("/token", "/registration/", "/registration/**", "/swagger-ui/**"))
+                .csrf((csrf) -> csrf.ignoringRequestMatchers("/api/v1/token/", "/api/v1/registration/", "/api/v1/registration/**", "/swagger-ui/**"))
                 .httpBasic(Customizer.withDefaults())
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

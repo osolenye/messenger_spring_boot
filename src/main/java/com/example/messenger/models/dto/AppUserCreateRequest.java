@@ -1,4 +1,4 @@
-package com.example.messenger.models.requests;
+package com.example.messenger.models.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
