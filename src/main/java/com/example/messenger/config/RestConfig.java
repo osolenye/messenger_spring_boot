@@ -49,7 +49,7 @@ public class RestConfig {
                         .requestMatchers("/registration/", "/registration/**", "/swagger-ui/**").permitAll()
                         .anyRequest().permitAll()
                 )
-                .csrf((csrf) -> csrf.ignoringRequestMatchers("/token"))
+                .csrf((csrf) -> csrf.ignoringRequestMatchers("/token", "/registration/", "/registration/**", "/swagger-ui/**"))
                 .httpBasic(Customizer.withDefaults())
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
