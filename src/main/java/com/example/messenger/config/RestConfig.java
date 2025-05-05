@@ -1,4 +1,4 @@
-package com.example.messenger;
+package com.example.messenger.config;
 
 import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.JWKSet;

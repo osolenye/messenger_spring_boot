@@ -1,4 +1,4 @@
-package com.example.messenger;
+package com.example.messenger.controllers;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;

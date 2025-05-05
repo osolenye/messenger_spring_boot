@@ -1,4 +1,4 @@
-package com.example.messenger;
+package com.example.messenger.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
