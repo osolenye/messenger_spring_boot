@@ -44,7 +44,7 @@ public class ChatController {
         List<AppUser> users = chat.getUsers();
         chatAddUsersRequest.getUsersId().forEach(usersId -> {
             AppUser user = appUserRepository.findById(usersId).orElse(null);
-            if (user != null) {
+            if (user != null && !users.contains(user)) {
                 users.add(user);
             }
         });
