@@ -8,6 +8,7 @@ import com.example.messenger.repositories.AppUserRepository;
 import com.example.messenger.repositories.ChatRepository;
 import lombok.Data;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,12 +25,16 @@ public class ChatController {
     private final AppUserRepository appUserRepository;
 
     @PostMapping("/create")
-    ResponseEntity<?> createChat(@RequestBody ChatCreateRequest chatCreateRequest) {
+    ResponseEntity<?> createChat(@RequestBody ChatCreateRequest chatCreateRequest,
+                                 Authentication authentication) {
         // Logic to create a chat
         Chat chat = new Chat();
         chat.setChatName(chatCreateRequest.getChatName());
         chat.setChatDescription(chatCreateRequest.getChatDescription());
-        chat.setUsers(new ArrayList<>());
+        AppUser chatCreator = appUserRepository.findByUsername(authentication.getName()).orElse(null);
+        List<AppUser> users = new ArrayList<>();
+        users.add(chatCreator);
+        chat.setUsers(users);
         return ResponseEntity.ok(chatRepository.save(chat));
     }
 
