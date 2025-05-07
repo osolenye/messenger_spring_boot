@@ -3,7 +3,9 @@ package com.example.messenger.controllers;
 
 import com.example.messenger.models.dto.MessagingConnection;
 import com.example.messenger.models.entities.Chat;
+import com.example.messenger.models.entities.Message;
 import com.example.messenger.repositories.ChatRepository;
+import com.example.messenger.repositories.MessageRepository;
 import lombok.Data;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -19,14 +21,16 @@ import java.util.List;
 @Data
 public class MessagingController {
     private final ChatRepository chatRepository;
+    private final MessageRepository messageRepository;
 
-    public MessagingController(ChatRepository chatRepository) {
+    public MessagingController(ChatRepository chatRepository, MessageRepository messageRepository) {
         this.chatRepository = chatRepository;
+        this.messageRepository = messageRepository;
     }
 
     @MessageMapping("/{chatId}")
     @SendTo("/topic/messages/{chatId}")
-    public Chat chatting(@DestinationVariable Long chatId) {
-        return chatRepository.findById(chatId).orElse(null);
+    public List<Message> chatting(@DestinationVariable Long chatId) {
+        return messageRepository.findAllByChatId(chatId);
     }
 }

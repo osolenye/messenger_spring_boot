@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/messages")
 @Data
@@ -42,8 +44,10 @@ public class MessageController {
         Message savedMessage = messageRepository.save(message);
 
         // 🔔 Отправляем обновлённый чат всем подписчикам
-        Chat updatedChat = chatRepository.findById(chat.getId()).orElse(null);
-        messagingTemplate.convertAndSend("/topic/messages/" + chat.getId(), updatedChat);
+//        Chat updatedChat = chatRepository.findById(chat.getId()).orElse(null);
+//        messagingTemplate.convertAndSend("/topic/messages/" + chat.getId(), updatedChat);
+        List<Message> messages = messageRepository.findAllByChatId(chat.getId());
+        messagingTemplate.convertAndSend("/topic/messages/" + chat.getId(), messages);
 
         return ResponseEntity.ok(savedMessage);
     }
