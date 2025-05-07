@@ -5,6 +5,7 @@ import com.example.messenger.models.dto.MessagingConnection;
 import com.example.messenger.models.entities.Chat;
 import com.example.messenger.repositories.ChatRepository;
 import lombok.Data;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -23,9 +24,9 @@ public class MessagingController {
         this.chatRepository = chatRepository;
     }
 
-    @MessageMapping("/")
-    @SendTo("/topic/messages")
-    public Chat chatting(@Payload Long chatId) throws Exception {
+    @MessageMapping("/{chatId}")
+    @SendTo("/topic/messages/{chatId}")
+    public Chat chatting(@DestinationVariable Long chatId) {
         return chatRepository.findById(chatId).orElse(null);
     }
 }
